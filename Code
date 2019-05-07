@@ -4,32 +4,94 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dog
+namespace DogProgram
 {
     class Dog
     {
-        static void Main(string[] args)
-        {
-            string dog_name;
-            string owner;
-            string age1;
-            int age;
-            string gender;
+        static private int barknum;
+        private string dog_name;
+        private string owner;
+        private int age;
+        private int val;
+        private string gender;
 
-            Console.WriteLine("What is the dog's name?");
+        public Dog()
+        {
+            Console.WriteLine("How many times did the dog bark?");
+            barknum = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Dog Name: ");
             dog_name = Console.ReadLine();
 
-            Console.WriteLine("You are the owner. What is your name?");
+            Console.WriteLine("Owner Name: ");
             owner = Console.ReadLine();
 
-            Console.WriteLine("What is the gender of your dog?");
-            gender = Console.ReadLine();
+            Console.WriteLine("Dog Age: ");
+            age = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("How old is your dog?");
-            age1 = Console.ReadLine();
-            age = Convert.ToInt32(age1);
+            Console.WriteLine("Dog Gender (0 for male, 1 for female): ");
+            val = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("If lost, call {0}. My name is {1}. I am a {2} and I am {3} year(s) old.", owner, dog_name, gender, age);
+            if (val == 0)
+            {
+                gender = "male";
+            }
+            else
+            {
+                gender = "female";
+            }
+        }
+
+        public string GetTag()
+        {
+            string result;
+
+            string time;
+            if (age > 1 || age == 0)
+            {
+                time = "years";
+            }
+            else
+            {
+                time = "year";
+            }
+
+            string gen;
+            string gend;
+            if (gender == "male")
+            {
+                gen = "he";
+                gend = "His";
+            }
+            else
+            {
+                gen = "she";
+                gend = "Her";
+            }
+
+
+
+            result = String.Format("If lost, call {0}. {1} name is {2} and {3} is {4} {5} old.", owner, gend, dog_name, gen, age, time);
+
+            return result;
+        }
+
+        static void Main(string[] args)
+        {
+            Dog d = new Dog();
+            string tag = d.GetTag();
+            int i;
+
+            Console.WriteLine("\n\n");
+
+            for (i = 0; i< (int) barknum; i++)
+            {
+                Console.WriteLine("WOOF!");
+            }
+
+            Console.WriteLine("\n\n{0}", tag);
+            Console.ReadKey();
+          
         }
     }
 }
